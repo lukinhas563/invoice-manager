@@ -30,6 +30,7 @@ public abstract class Builder {
     }
 
     public Builder makeInfo() {
+        this.key = this.document.getElementsByTagName("infNFSe").item(0).getAttributes().item(0).getTextContent();
         String infoNumber = this.document.getElementsByTagName("nNFSe").item(0).getTextContent();
         this.number = Integer.parseInt(infoNumber);
 
@@ -48,15 +49,7 @@ public abstract class Builder {
     public Builder makeSender() {
         NodeList nodeSender = this.document.getElementsByTagName("emit").item(0).getChildNodes();
 
-        for (int i = 0; i < nodeSender.getLength(); i++) {
-            Node item = nodeSender.item(i);
-
-            if(item.getNodeName().equals("CNPJ")) {
-                this.sender = this.makeLegalPerson(nodeSender);
-            } else if(item.getNodeName().equals("CPF")){
-                this.sender = this.makeIndividualPerson(nodeSender);
-            }
-        }
+        this.sender = this.makePerson(nodeSender);
 
         return this;
     };
@@ -64,17 +57,26 @@ public abstract class Builder {
     public Builder makeRecipient() {
         NodeList nodeRecipient = this.document.getElementsByTagName("toma").item(0).getChildNodes();
 
-        for (int i = 0; i < nodeRecipient.getLength(); i++) {
-            Node item = nodeRecipient.item(i);
+        this.recipient = this.makePerson(nodeRecipient);
+
+        return this;
+    };
+
+    private Person makePerson(NodeList nodeList) {
+
+        Person person = null;
+
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Node item = nodeList.item(i);
 
             if(item.getNodeName().equals("CNPJ")) {
-                this.recipient = this.makeLegalPerson(nodeRecipient);
+                person = this.makeLegalPerson(nodeList);
             } else if (item.getNodeName().equals("CPF")) {
-                this.recipient = this.makeIndividualPerson(nodeRecipient);
+                person =  this.makeIndividualPerson(nodeList);
             }
         }
 
-        return this;
+        return person;
     };
 
     public Legal makeLegalPerson(NodeList nodeList) {

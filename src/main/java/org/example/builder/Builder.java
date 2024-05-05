@@ -113,7 +113,7 @@ public abstract class Builder {
             }
         }
 
-        return new Legal(identification, name, tel, email, "Simples Nacional", address);
+        return new Legal( name, identification, email, tel, "Simples Nacional", address);
     };
 
     public Individual makeIndividualPerson(NodeList nodeItem) {
@@ -150,6 +150,7 @@ public abstract class Builder {
 
                 zipCode = item.getTextContent();
             }
+
         }
 
         return new Address(address, city, zipCode);

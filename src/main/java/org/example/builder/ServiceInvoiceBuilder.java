@@ -142,15 +142,6 @@ public class ServiceInvoiceBuilder implements Builder{
                 zipCode = item.getTextContent();
             }
             if (item.getNodeName().equals("endNac")) {
-                NodeList nodeListAddress = item.getChildNodes();
-
-                for (int j = 0; j < nodeListAddress.getLength(); j++) {
-                    Node addressItem = nodeListAddress.item(j);
-                    if(addressItem.getNodeName().equals("CEP")) {
-                        zipCode = addressItem.getTextContent();
-                    }
-                }
-
                 zipCode = item.getTextContent();
             }
 

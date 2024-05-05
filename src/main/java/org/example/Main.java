@@ -15,7 +15,7 @@ public class Main {
 
         ServiceInvoiceBuilder serviceInvoiceBuilder = new ServiceInvoiceBuilder(document);
 
-        Service invoice = serviceInvoiceBuilder.makeServiceInvoice();
+        Service invoice = serviceInvoiceBuilder.makeInfo().makeSender().makeRecipient().makeServiceInvoice();
 
         System.out.println(invoice);
 

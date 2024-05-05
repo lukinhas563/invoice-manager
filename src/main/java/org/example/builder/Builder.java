@@ -1,27 +1,20 @@
 package org.example.builder;
 
+
+import org.example.model.address.Address;
+import org.example.model.person.Individual;
+import org.example.model.person.Legal;
 import org.example.model.person.Person;
-import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 
-public abstract class Builder {
+public interface Builder {
 
-    protected final Document document;
-
-    protected String key;
-    protected int number;
-    protected String competence;
-    protected String series;
-    protected String code;
-    protected String description;
-    protected String locationProvision;
-
-    protected double netValue;
-
-    protected Person sender;
-    protected Person recipient;
-
-    public Builder(Document document) {
-        this.document = document;
-    }
+    public Builder makeInfo();
+    public Builder makeSender();
+    public Builder makeRecipient();
+    public Person makePerson(NodeList nodeList);
+    public Individual makeIndividualPerson(NodeList nodeList);
+    public Legal makeLegalPerson(NodeList nodeList);
+    public Address makeAddress(NodeList nodeList);
 
 }

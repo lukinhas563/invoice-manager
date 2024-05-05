@@ -10,47 +10,62 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 
-public class ServiceInvoiceBuilder extends Builder{
+public class ServiceInvoiceBuilder implements Builder{
+
+    protected final Document document;
+
+    protected String key;
+    protected int number;
+    protected String competence;
+    protected String series;
+    protected String code;
+    protected String description;
+    protected String locationProvision;
+
+    protected double netValue;
+
+    protected Person sender;
+    protected Person recipient;
 
     public ServiceInvoiceBuilder(Document document) {
-        super(document);
+        this.document = document;
     }
 
     public ServiceInvoiceBuilder makeInfo() {
 
-        key = document.getElementsByTagName("infNFSe").item(0).getAttributes().item(0).getTextContent();
-        String infoNumber = document.getElementsByTagName("nNFSe").item(0).getTextContent();
-        number = Integer.parseInt(infoNumber);
+        this.key = this.document.getElementsByTagName("infNFSe").item(0).getAttributes().item(0).getTextContent();
+        String infoNumber = this.document.getElementsByTagName("nNFSe").item(0).getTextContent();
+        this.number = Integer.parseInt(infoNumber);
 
-        competence = document.getElementsByTagName("dhProc").item(0).getTextContent();
-        series = document.getElementsByTagName("serie").item(0).getTextContent();
-        code = document.getElementsByTagName("xTribNac").item(0).getTextContent();
-        description = document.getElementsByTagName("xDescServ").item(0).getTextContent();
-        locationProvision = document.getElementsByTagName("xLocPrestacao").item(0).getTextContent();
+        this.competence = this.document.getElementsByTagName("dhProc").item(0).getTextContent();
+        this.series = this.document.getElementsByTagName("serie").item(0).getTextContent();
+        this.code = this.document.getElementsByTagName("xTribNac").item(0).getTextContent();
+        this.description = this.document.getElementsByTagName("xDescServ").item(0).getTextContent();
+        this.locationProvision = this.document.getElementsByTagName("xLocPrestacao").item(0).getTextContent();
 
         String infoNetValue = document.getElementsByTagName("vServ").item(0).getTextContent();
-        netValue = Double.parseDouble(infoNetValue);
+        this.netValue = Double.parseDouble(infoNetValue);
 
         return this;
     }
 
     public ServiceInvoiceBuilder makeSender() {
-        NodeList nodeSender = document.getElementsByTagName("emit").item(0).getChildNodes();
+        NodeList nodeSender = this.document.getElementsByTagName("emit").item(0).getChildNodes();
 
-        sender = this.makePerson(nodeSender);
+        this.sender = this.makePerson(nodeSender);
 
         return this;
     }
 
     public ServiceInvoiceBuilder makeRecipient() {
-        NodeList nodeRecipient = document.getElementsByTagName("toma").item(0).getChildNodes();
+        NodeList nodeRecipient = this.document.getElementsByTagName("toma").item(0).getChildNodes();
 
-        recipient = this.makePerson(nodeRecipient);
+        this.recipient = this.makePerson(nodeRecipient);
 
         return this;
     }
 
-    private Person makePerson(NodeList nodeList) {
+    public Person makePerson(NodeList nodeList) {
 
         Person person = null;
 
@@ -145,8 +160,7 @@ public class ServiceInvoiceBuilder extends Builder{
     }
 
     public Service makeServiceInvoice() {
-        this.makeInfo().makeSender().makeRecipient();
-        return new Service(key, number, competence, series, netValue, sender, recipient, code, description, locationProvision);
+        return new Service(this.key, this.number, this.competence, this.series, this.netValue, this.sender, this.recipient, this.code, this.description, this.locationProvision);
     }
 
 }

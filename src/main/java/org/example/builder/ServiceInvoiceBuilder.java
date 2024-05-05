@@ -65,7 +65,7 @@ public class ServiceInvoiceBuilder implements Builder{
         return this;
     }
 
-    public Person makePerson(NodeList nodeList) {
+    private Person makePerson(NodeList nodeList) {
 
         Person person = null;
 
@@ -82,12 +82,12 @@ public class ServiceInvoiceBuilder implements Builder{
         return person;
     }
 
-    public Individual makeIndividualPerson(NodeList nodeItem) {
+    private Individual makeIndividualPerson(NodeList nodeItem) {
         System.out.println("CPF");
         return new Individual("", "", "", "", new Address("", "", ""));
     }
 
-    public Legal makeLegalPerson(NodeList nodeList) {
+    private Legal makeLegalPerson(NodeList nodeList) {
 
         String identification = "";
         String name = "";
@@ -124,7 +124,7 @@ public class ServiceInvoiceBuilder implements Builder{
         return new Legal( name, identification, email, tel, "Simples Nacional", address);
     }
 
-    public Address makeAddress(NodeList nodeList) {
+    private Address makeAddress(NodeList nodeList) {
         String address = "";
         String city = "";
         String zipCode = "";

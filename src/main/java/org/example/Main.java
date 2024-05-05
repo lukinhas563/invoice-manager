@@ -9,7 +9,12 @@ public class Main {
     public static void main(String[] args) {
 
         CreateDocument creater = new CreateDocument();
-        //creater.setDocument();
+        boolean result = creater.setDocument();
+
+        if (!result) {
+            System.out.println("Erro na leitura do arquivo.");
+            return;
+        }
 
         Document document = creater.getDocument();
 

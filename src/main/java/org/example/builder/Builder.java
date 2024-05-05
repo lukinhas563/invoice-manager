@@ -12,9 +12,5 @@ public interface Builder {
     public Builder makeInfo();
     public Builder makeSender();
     public Builder makeRecipient();
-    public Person makePerson(NodeList nodeList);
-    public Individual makeIndividualPerson(NodeList nodeList);
-    public Legal makeLegalPerson(NodeList nodeList);
-    public Address makeAddress(NodeList nodeList);
 
 }

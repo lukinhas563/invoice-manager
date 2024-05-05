@@ -44,7 +44,7 @@ public abstract class Builder {
         this.netValue = Double.parseDouble(infoNetValue);
 
         return this;
-    };
+    }
 
     public Builder makeSender() {
         NodeList nodeSender = this.document.getElementsByTagName("emit").item(0).getChildNodes();
@@ -52,7 +52,7 @@ public abstract class Builder {
         this.sender = this.makePerson(nodeSender);
 
         return this;
-    };
+    }
 
     public Builder makeRecipient() {
         NodeList nodeRecipient = this.document.getElementsByTagName("toma").item(0).getChildNodes();
@@ -60,7 +60,7 @@ public abstract class Builder {
         this.recipient = this.makePerson(nodeRecipient);
 
         return this;
-    };
+    }
 
     private Person makePerson(NodeList nodeList) {
 
@@ -77,7 +77,7 @@ public abstract class Builder {
         }
 
         return person;
-    };
+    }
 
     public Legal makeLegalPerson(NodeList nodeList) {
 
@@ -114,12 +114,12 @@ public abstract class Builder {
         }
 
         return new Legal( name, identification, email, tel, "Simples Nacional", address);
-    };
+    }
 
     public Individual makeIndividualPerson(NodeList nodeItem) {
         System.out.println("CPF");
         return new Individual("", "", "", "", new Address("", "", ""));
-    };
+    }
 
     public Address makeAddress(NodeList nodeList) {
         String address = "";
@@ -143,7 +143,7 @@ public abstract class Builder {
 
                 for (int j = 0; j < nodeListAddress.getLength(); j++) {
                     Node addressItem = nodeListAddress.item(j);
-                    if(addressItem.equals("CEP")) {
+                    if(addressItem.getNodeName().equals("CEP")) {
                         zipCode = addressItem.getTextContent();
                     }
                 }

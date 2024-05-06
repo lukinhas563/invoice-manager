@@ -1,28 +1,27 @@
 package org.example;
 
-import org.example.builder.ServiceInvoiceBuilder;
-import org.example.model.invoice.Service;
-import org.example.util.CreateDocument;
+import org.example.factory.DocumentFactory;
 import org.w3c.dom.Document;
+
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
 
-        CreateDocument creater = new CreateDocument();
-        boolean result = creater.setDocument();
+        // PATHS
+        String path = ;
 
-        if (!result) {
-            System.out.println("Erro na leitura do arquivo.");
-            return;
-        }
+        String[] paths = new String[3];
+        paths[0] = ;
+        paths[1] = ;
+        paths[2] = ;
 
-        Document document = creater.getDocument();
+        DocumentFactory factory = new DocumentFactory();
 
-        ServiceInvoiceBuilder serviceInvoiceBuilder = new ServiceInvoiceBuilder(document);
+        // DOCUMENTS
+        Document document = factory.createDocument(path);
+        List<Document> documents = factory.createDocument(paths);
 
-        Service invoice = serviceInvoiceBuilder.makeInfo().makeSender().makeRecipient().makeServiceInvoice();
-
-        System.out.println(invoice);
 
     }
 }

@@ -11,12 +11,12 @@ public class Main {
     public static void main(String[] args) {
 
         // PATHS
-        String path = ;
+        String path = "C:/Users/cedec/OneDrive/Área de Trabalho/Lucas/nfs/NFS 50.xml";
 
         String[] paths = new String[3];
-        paths[0] = ;
-        paths[1] = ;
-        paths[2] = ;
+        paths[0] = "C:/Users/cedec/OneDrive/Área de Trabalho/Lucas/nfs/NFS 49.xml";
+        paths[1] = "C:/Users/cedec/OneDrive/Área de Trabalho/Lucas/nfs/NFS 50.xml";
+        paths[2] = "C:/Users/cedec/OneDrive/Área de Trabalho/Lucas/nfs/NFS 51.xml";
 
         DocumentFactory factory = new DocumentFactory();
 

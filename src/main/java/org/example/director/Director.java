@@ -13,8 +13,8 @@ import java.util.List;
 public class Director {
 
     // Factories
-    private DocumentFactoryInterface documentFactory;
-    private ServiceFactoryInterface serviceInvoiceFactory;
+    private final DocumentFactoryInterface documentFactory;
+    private final ServiceFactoryInterface serviceInvoiceFactory;
 
     // Lists
     private List<Document> documentList = new ArrayList<>();

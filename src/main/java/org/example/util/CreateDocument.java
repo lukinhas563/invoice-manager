@@ -14,7 +14,7 @@ public class CreateDocument {
 
     Document document;
 
-    public void setDocument(String path) throws FileNotFoundException {
+    public void setDocument(String path) throws FileNotFoundException, IllegalArgumentException {
         Path file = Paths.get(path);
 
         if (!Files.exists(file)) {

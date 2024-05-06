@@ -5,6 +5,7 @@ import org.w3c.dom.Document;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -13,11 +14,15 @@ public class CreateDocument {
 
     Document document;
 
-    public boolean setDocument(String path) {
+    public void setDocument(String path) throws FileNotFoundException {
         Path file = Paths.get(path);
 
-        if (!Files.exists(file) && !path.toLowerCase().endsWith(".xml")) {
-            return false;
+        if (!Files.exists(file)) {
+            throw new FileNotFoundException("File not found: " + path);
+        }
+
+        if (!path.toLowerCase().endsWith(".xml")) {
+            throw new IllegalArgumentException("The file doesn't have an .xml extension: " + path);
         }
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -29,9 +34,8 @@ public class CreateDocument {
 
             this.document = documentBuilder.parse(new File(path));
 
-            return true;
         } catch (Exception e) {
-            return false;
+            throw new RuntimeException("Error: " + e.getMessage());
         }
 
     }

@@ -30,6 +30,5 @@ public class Main {
         Service serviceInvoice = invoiceFactory.createServiceInvoice(document);
         List<Service> serviceInvoices = invoiceFactory.createServiceInvoice(documents);
 
-
     }
 }

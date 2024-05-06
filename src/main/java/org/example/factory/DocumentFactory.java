@@ -13,7 +13,7 @@ public class DocumentFactory implements Factory {
         CreateDocument create = new CreateDocument();
 
         for (int i = 0; i < paths.length; i++) {
-           create.setDocument(paths[i]);
+            create.setDocument(paths[i]);
 
             documents.add(create.getDocument());
         }

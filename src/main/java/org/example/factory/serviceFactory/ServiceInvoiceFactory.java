@@ -1,4 +1,4 @@
-package org.example.factory;
+package org.example.factory.serviceFactory;
 
 import org.example.builder.ServiceInvoiceBuilder;
 import org.example.model.invoice.Service;
@@ -7,7 +7,7 @@ import org.w3c.dom.Document;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServiceInvoiceFactory implements Factory {
+public class ServiceInvoiceFactory implements ServiceFactoryInterface {
 
     public Service createServiceInvoice(Document document) {
        ServiceInvoiceBuilder builder = new ServiceInvoiceBuilder(document);

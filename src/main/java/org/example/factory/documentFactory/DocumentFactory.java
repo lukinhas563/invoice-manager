@@ -1,4 +1,4 @@
-package org.example.factory;
+package org.example.factory.documentFactory;
 
 import org.example.util.CreateDocument;
 import org.w3c.dom.Document;
@@ -11,7 +11,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DocumentFactory implements Factory {
+public class DocumentFactory implements DocumentFactoryInterface {
 
     public List<Document> createDocument(String[] paths) {
         List<Document> documents = new ArrayList<>();

@@ -1,7 +1,9 @@
 package org.example.director;
 
-import org.example.factory.DocumentFactory;
-import org.example.factory.ServiceInvoiceFactory;
+import org.example.factory.documentFactory.DocumentFactory;
+import org.example.factory.documentFactory.DocumentFactoryInterface;
+import org.example.factory.serviceFactory.ServiceFactoryInterface;
+import org.example.factory.serviceFactory.ServiceInvoiceFactory;
 import org.example.model.invoice.Service;
 import org.w3c.dom.Document;
 
@@ -11,12 +13,17 @@ import java.util.List;
 public class Director {
 
     // Factories
-    private DocumentFactory documentFactory = new DocumentFactory();
-    private ServiceInvoiceFactory serviceInvoiceFactory = new ServiceInvoiceFactory();
+    private DocumentFactoryInterface documentFactory;
+    private ServiceFactoryInterface serviceInvoiceFactory;
 
     // Lists
     private List<Document> documentList = new ArrayList<>();
     private List<Service> serviceList = new ArrayList<>();
+
+    public Director(DocumentFactoryInterface documentFactory, ServiceFactoryInterface serviceInvoiceFactory) {
+        this.documentFactory = documentFactory;
+        this.serviceInvoiceFactory = serviceInvoiceFactory;
+    }
 
     public void createDocumentByDirectory(String url) {
 

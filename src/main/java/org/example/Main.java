@@ -11,32 +11,27 @@ public class Main {
     public static void main(String[] args) {
 
         // PATHS
-        String path = ;
-
-        String[] paths = new String[3];
-        paths[0] = ;
-        paths[1] = ;
-        paths[2] = ;
-
         DocumentFactory factory = new DocumentFactory();
 
-        // DOCUMENTS
-        Document document = factory.createDocument(path);
-        List<Document> documents = factory.createDocument(paths);
-
-        // INVOICE
-        ServiceInvoiceFactory invoiceFactory =  new ServiceInvoiceFactory();
-
-        Service serviceInvoice = invoiceFactory.createServiceInvoice(document);
-        List<Service> serviceInvoices = invoiceFactory.createServiceInvoice(documents);
-
         try {
-            List<Document> documentList = factory.createDocumentByDirectory();
+            List<Document> documents = factory.createDocumentByDirectory();
 
-            System.out.println(documentList);
+            // INVOICE
+            ServiceInvoiceFactory invoiceFactory =  new ServiceInvoiceFactory();
+            List<Service> serviceInvoices = invoiceFactory.createServiceInvoice(documents);
+
+            for (Service invoices : serviceInvoices) {
+                System.out.println(invoices);
+            }
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+
+
+
+
+
 
 
     }

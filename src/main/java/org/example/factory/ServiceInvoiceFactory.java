@@ -7,7 +7,7 @@ import org.w3c.dom.Document;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServiceInvoiceFactory {
+public class ServiceInvoiceFactory implements Factory {
 
     public Service createServiceInvoice(Document document) {
        ServiceInvoiceBuilder builder = new ServiceInvoiceBuilder(document);

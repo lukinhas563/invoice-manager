@@ -30,5 +30,14 @@ public class Main {
         Service serviceInvoice = invoiceFactory.createServiceInvoice(document);
         List<Service> serviceInvoices = invoiceFactory.createServiceInvoice(documents);
 
+        try {
+            List<Document> documentList = factory.createDocumentByDirectory();
+
+            System.out.println(documentList);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+
     }
 }

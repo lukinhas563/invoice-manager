@@ -1,38 +1,31 @@
 package org.example;
 
-import org.example.factory.DocumentFactory;
-import org.example.factory.ServiceInvoiceFactory;
+import org.example.director.Director;
 import org.example.model.invoice.Service;
-import org.w3c.dom.Document;
 
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
 
-        // PATHS
-        DocumentFactory factory = new DocumentFactory();
+        String url = "C:/Users/cedec/OneDrive/Área de Trabalho/Lucas/nfs";
+        Director director = new Director();
 
-        try {
-            List<Document> documents = factory.createDocumentByDirectory();
+        // CREATE THE DOCUMENT BY DIRECTORY
+        director.createDocumentByDirectory(url);
 
-            // INVOICE
-            ServiceInvoiceFactory invoiceFactory =  new ServiceInvoiceFactory();
-            List<Service> serviceInvoices = invoiceFactory.createServiceInvoice(documents);
+        // CREATE THE SERVICE INVOICE
+        director.createServiceInvoice();
 
-            for (Service invoices : serviceInvoices) {
-                System.out.println(invoices);
-            }
+        // GET THE RESULTS
+        List<Service> invoices = director.getServiceInvoice();
 
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        for (Service invoice : invoices) {
+            System.out.println("------------------------------------------------");
+            System.out.println(invoice);
         }
 
-
-
-
-
-
+        System.out.println("Total: " + director.getTotalValue());
 
     }
 }

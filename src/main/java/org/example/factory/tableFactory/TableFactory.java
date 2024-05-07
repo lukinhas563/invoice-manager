@@ -42,7 +42,7 @@ public class TableFactory {
             Person sender = invoice.getSender();
             Person recipient = invoice.getRecipient();
 
-            String[] item = {invoice.getKey(), Integer.toString(invoice.getNumber()), invoice.getCompetence().toString(), invoice.getSeries(), Double.toString(invoice.getNetValue()), invoice.getLocationProvision(), invoice.getCode(), invoice.getDescription(), sender.getName(), sender.getIdentification(), "Simples Nacional", sender.getEmail(), sender.getTel(), sender.getAddress().getAddress(), sender.getAddress().getCity(), sender.getAddress().getZipCode(), recipient.getName(), recipient.getIdentification(), "Simples Nacional", recipient.getEmail(), recipient.getTel(), recipient.getAddress().getAddress(), recipient.getAddress().getCity(), recipient.getAddress().getZipCode()};
+            String[] item = {invoice.getKey(), Integer.toString(invoice.getNumber()), invoice.getCompetence().toString(), invoice.getSeries(), Double.toString(invoice.getNetValue()), invoice.getLocationProvision(), invoice.getCode(), invoice.getDescription(), sender.getName(), sender.getIdentification(), sender.getTax(), sender.getEmail(), sender.getTel(), sender.getAddress().getAddress(), sender.getAddress().getCity(), sender.getAddress().getZipCode(), recipient.getName(), recipient.getIdentification(), recipient.getTax(), recipient.getEmail(), recipient.getTel(), recipient.getAddress().getAddress(), recipient.getAddress().getCity(), recipient.getAddress().getZipCode()};
             data.add(item);
         }
     }

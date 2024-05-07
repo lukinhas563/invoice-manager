@@ -21,7 +21,7 @@ public class Main {
 
         List<Service> services = director.getServiceInvoice();
 
-        new TableFactory().create(services);
+        //new TableFactory().create(services);
 
     }
 }

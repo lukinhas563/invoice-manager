@@ -23,6 +23,7 @@ public class ServiceInvoiceBuilder implements Builder{
     protected String code;
     protected String description;
     protected String locationProvision;
+    protected String tax;
 
     protected double netValue;
 
@@ -43,6 +44,13 @@ public class ServiceInvoiceBuilder implements Builder{
         String[] date = dateResult.split("T");
         this.competence = LocalDate.parse(date[0]);
 
+        String taxContent = this.document.getElementsByTagName("opSimpNac").item(0).getTextContent();
+        if (taxContent.equals("1") || taxContent.equals("2")) {
+            this.tax = "Simples Nacional";
+        } else {
+            this.tax = "Lucro Presumido";
+        }
+
         this.series = this.document.getElementsByTagName("serie").item(0).getTextContent();
         this.code = this.document.getElementsByTagName("xTribNac").item(0).getTextContent();
         this.description = this.document.getElementsByTagName("xDescServ").item(0).getTextContent();
@@ -56,21 +64,23 @@ public class ServiceInvoiceBuilder implements Builder{
 
     public ServiceInvoiceBuilder makeSender() {
         NodeList nodeSender = this.document.getElementsByTagName("emit").item(0).getChildNodes();
+        String type = this.document.getElementsByTagName("emit").item(0).getNodeName();
 
-        this.sender = this.makePerson(nodeSender);
+        this.sender = this.makePerson(nodeSender, type);
 
         return this;
     }
 
     public ServiceInvoiceBuilder makeRecipient() {
         NodeList nodeRecipient = this.document.getElementsByTagName("toma").item(0).getChildNodes();
+        String type = this.document.getElementsByTagName("toma").item(0).getNodeName();
 
-        this.recipient = this.makePerson(nodeRecipient);
+        this.recipient = this.makePerson(nodeRecipient, type);
 
         return this;
     }
 
-    private Person makePerson(NodeList nodeList) {
+    private Person makePerson(NodeList nodeList, String type) {
 
         Person person = null;
 
@@ -78,7 +88,7 @@ public class ServiceInvoiceBuilder implements Builder{
             Node item = nodeList.item(i);
 
             if(item.getNodeName().equals("CNPJ")) {
-                person = this.makeLegalPerson(nodeList);
+                person = this.makeLegalPerson(nodeList, type);
             } else if (item.getNodeName().equals("CPF")) {
                 person =  this.makeIndividualPerson(nodeList);
             }
@@ -92,12 +102,14 @@ public class ServiceInvoiceBuilder implements Builder{
         return new Individual("", "", "", "", new Address("", "", ""));
     }
 
-    private Legal makeLegalPerson(NodeList nodeList) {
+    private Legal makeLegalPerson(NodeList nodeList, String type) {
 
         String identification = "";
         String name = "";
         String tel = "";
         String email = "";
+        String tax = type.equals("emit") ? this.tax : "";
+
         Address address = new Address("", "", "");
 
         for (int i = 0; i < nodeList.getLength(); i++) {
@@ -126,7 +138,7 @@ public class ServiceInvoiceBuilder implements Builder{
             }
         }
 
-        return new Legal( name, identification, email, tel, "Simples Nacional", address);
+        return new Legal( name, identification, email, tel, tax, address);
     }
 
     private Address makeAddress(NodeList nodeList) {

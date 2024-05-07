@@ -7,6 +7,7 @@ public abstract class Person {
     private String identification;
     private String email;
     private String tel;
+    private String tax;
 
     private Address address;
 
@@ -15,6 +16,7 @@ public abstract class Person {
             String identification,
             String email,
             String tel,
+            String tax,
             Address address
             )
     {
@@ -22,6 +24,7 @@ public abstract class Person {
         this.identification = identification;
         this.email = email;
         this.tel = tel;
+        this.tax = tax;
         this.address = address;
     }
 
@@ -39,6 +42,10 @@ public abstract class Person {
 
     public void setTel(String tel) {
         this.tel = tel;
+    }
+
+    public void setTax(String tax) {
+        this.tax = tax;
     }
 
     public void setAddress(Address address) {
@@ -59,6 +66,10 @@ public abstract class Person {
 
     public String getTel() {
         return tel;
+    }
+
+    public String getTax() {
+        return tax;
     }
 
     public Address getAddress() {

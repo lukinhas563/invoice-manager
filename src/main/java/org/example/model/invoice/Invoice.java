@@ -2,10 +2,12 @@ package org.example.model.invoice;
 
 import org.example.model.person.Person;
 
+import java.time.LocalDate;
+
 public abstract class Invoice {
    private String key;
    private int number;
-   private String competence;
+   private LocalDate competence;
    private String series;
 
    private double netValue;
@@ -13,7 +15,7 @@ public abstract class Invoice {
    private Person sender;
    private Person recipient;
 
-   public Invoice(String key, int number, String competence, String series, double netValue, Person sender, Person recipient) {
+   public Invoice(String key, int number, LocalDate competence, String series, double netValue, Person sender, Person recipient) {
       this.key = key;
       this.number = number;
       this.competence = competence;
@@ -32,7 +34,7 @@ public abstract class Invoice {
       this.number = number;
    }
 
-   public void setCompetence(String competence) {
+   public void setCompetence(LocalDate competence) {
       this.competence = competence;
    }
 
@@ -60,7 +62,7 @@ public abstract class Invoice {
       return number;
    }
 
-   public String getCompetence() {
+   public LocalDate getCompetence() {
       return competence;
    }
 

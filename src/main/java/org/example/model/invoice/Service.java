@@ -2,13 +2,15 @@ package org.example.model.invoice;
 
 import org.example.model.person.Person;
 
+import java.time.LocalDate;
+
 public class Service extends Invoice{
 
     private String code;
     private String description;
     private String locationProvision;
 
-    public Service(String key, int number, String competence, String series, Double netValue ,Person sender, Person recipient, String code, String description, String locationProvision) {
+    public Service(String key, int number, LocalDate competence, String series, Double netValue , Person sender, Person recipient, String code, String description, String locationProvision) {
         super(key, number, competence, series, netValue, sender, recipient);
 
         this.code = code;

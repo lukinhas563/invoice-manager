@@ -9,6 +9,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import java.time.LocalDate;
+
 
 public class ServiceInvoiceBuilder implements Builder{
 
@@ -16,7 +18,7 @@ public class ServiceInvoiceBuilder implements Builder{
 
     protected String key;
     protected int number;
-    protected String competence;
+    protected LocalDate competence;
     protected String series;
     protected String code;
     protected String description;
@@ -37,7 +39,10 @@ public class ServiceInvoiceBuilder implements Builder{
         String infoNumber = this.document.getElementsByTagName("nNFSe").item(0).getTextContent();
         this.number = Integer.parseInt(infoNumber);
 
-        this.competence = this.document.getElementsByTagName("dhProc").item(0).getTextContent();
+        String dateResult = this.document.getElementsByTagName("dhProc").item(0).getTextContent();
+        String[] date = dateResult.split("T");
+        this.competence = LocalDate.parse(date[0]);
+
         this.series = this.document.getElementsByTagName("serie").item(0).getTextContent();
         this.code = this.document.getElementsByTagName("xTribNac").item(0).getTextContent();
         this.description = this.document.getElementsByTagName("xDescServ").item(0).getTextContent();

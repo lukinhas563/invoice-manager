@@ -3,8 +3,10 @@ package org.example;
 import org.example.director.Director;
 import org.example.factory.documentFactory.DocumentFactory;
 import org.example.factory.serviceFactory.ServiceInvoiceFactory;
+import org.example.factory.tableFactory.TableFactory;
 import org.example.model.invoice.Service;
 
+import java.io.IOException;
 import java.util.List;
 
 public class Main {
@@ -13,21 +15,13 @@ public class Main {
         String url = "C:/Users/cedec/OneDrive/Área de Trabalho/Lucas/nfs";
         Director director = new Director(new DocumentFactory(), new ServiceInvoiceFactory());
 
-        // CREATE THE DOCUMENT BY DIRECTORY
         director.createDocumentByDirectory(url);
 
-        // CREATE THE SERVICE INVOICE
         director.createServiceInvoice();
 
-        // GET THE RESULTS
-        List<Service> invoices = director.getServiceInvoice();
+        List<Service> services = director.getServiceInvoice();
 
-        for (Service invoice : invoices) {
-            System.out.println("------------------------------------------------");
-            System.out.println(invoice);
-        }
-
-        System.out.println("Total: " + director.getTotalValue());
+        new TableFactory().create(services);
 
     }
 }

@@ -1,9 +1,7 @@
 package org.example.director;
 
-import org.example.factory.documentFactory.DocumentFactory;
 import org.example.factory.documentFactory.DocumentFactoryInterface;
 import org.example.factory.serviceFactory.ServiceFactoryInterface;
-import org.example.factory.serviceFactory.ServiceInvoiceFactory;
 import org.example.model.invoice.Service;
 import org.w3c.dom.Document;
 
@@ -71,18 +69,6 @@ public class Director {
       List<Service> invoices = serviceInvoiceFactory.createServiceInvoice(documentList);
 
       serviceList.addAll(invoices);
-    }
-
-    public void createServiceInvoice(Document document) {
-        Service service = serviceInvoiceFactory.createServiceInvoice(document);
-
-        serviceList.add(service);
-    }
-
-    public void createServiceInvoice(List<Document> documents) {
-        List<Service> services = serviceInvoiceFactory.createServiceInvoice(documents);
-
-        serviceList.addAll(services);
     }
 
     public List<Service> getServiceInvoice() {
